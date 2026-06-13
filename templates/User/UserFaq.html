@@ -1,0 +1,61 @@
+{% extends 'User/Userbase.html' %}
+
+{% block title %}FAQ - User Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Header -->
+    <div class="mb-4 p-4 rounded shadow-sm bg-white animate__animated animate__fadeIn">
+        <h3 class="fw-bold text-medical-blue mb-1">
+            <i class="fas fa-question-circle me-2 text-teal"></i>
+            Frequently Asked Questions
+        </h3>
+        <p class="text-muted mb-0">
+            Find answers to common questions about anesthesia prediction and usage.
+        </p>
+    </div>
+
+    {% if msg %}
+    <div class="alert alert-warning shadow-sm">
+        <i class="fas fa-exclamation-triangle me-2"></i>{{ msg }}
+    </div>
+    {% endif %}
+
+    {% if faqs %}
+    <div class="accordion shadow-sm rounded bg-white p-3" id="faqAccordion">
+        {% for faq in faqs %}
+        <div class="accordion-item border-0 mb-3">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+                <button class="accordion-button {% if not loop.first %}collapsed{% endif %} fw-semibold"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ loop.index }}"
+                        aria-expanded="{{ 'true' if loop.first else 'false' }}"
+                        aria-controls="collapse{{ loop.index }}">
+
+                    <i class="fas fa-heartbeat me-2 text-teal"></i>
+                    {{ faq.question }}
+                </button>
+            </h2>
+
+            <div id="collapse{{ loop.index }}"
+                 class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                 aria-labelledby="heading{{ loop.index }}"
+                 data-bs-parent="#faqAccordion">
+
+                <div class="accordion-body text-secondary">
+                    {{ faq.answer }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info shadow-sm">
+        <i class="fas fa-info-circle me-2"></i>No FAQs available at the moment.
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

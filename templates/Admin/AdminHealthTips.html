@@ -1,0 +1,114 @@
+{% extends "Admin/Adminbase.html" %}
+{% block title %}Admin | Anesthesia Health Tips{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4 p-4 rounded shadow-sm bg-white animate__animated animate__fadeIn">
+    <div>
+      <h3 class="fw-bold text-medical-blue mb-1">
+        <i class="fas fa-heartbeat me-2 text-teal"></i>
+        Manage Anesthesia Health Tips
+      </h3>
+      <p class="text-muted mb-0">
+        Add, view, and manage health tips shown to users.
+      </p>
+    </div>
+
+    <!-- Add Tip Button -->
+    <button class="btn btn-success px-4" data-bs-toggle="modal" data-bs-target="#addTipModal">
+      <i class="fas fa-plus me-2"></i>Add Tip
+    </button>
+  </div>
+
+  {% if msg %}
+  <div class="alert alert-{{ msg_type }} alert-dismissible fade show shadow-sm">
+    <i class="fas fa-info-circle me-2"></i>{{ msg }}
+    <button type="button" class="btn-close btn-close-teal" data-bs-dismiss="alert"></button>
+  </div>
+  {% endif %}
+
+  <!-- FULL WIDTH TIP BLOCKS -->
+  {% if tips %}
+  <div class="row">
+    {% for tip in tips %}
+    <div class="col-12 mb-4">
+      <div class="card shadow-sm border-0 animate__animated animate__fadeInUp">
+
+        <div class="card-header bg-gradient-medical text-white d-flex justify-content-between align-items-center">
+          <span class="fw-semibold">
+            <i class="fas fa-heartbeat me-2"></i>Health Tip
+          </span>
+        </div>
+
+        <div class="card-body">
+          <p class="text-secondary collapse mb-3" id="tip{{ tip.id }}">
+            {{ tip.tip }}
+          </p>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- View / Hide -->
+            <button class="btn btn-outline-primary btn-sm"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#tip{{ tip.id }}">
+              <i class="fas fa-eye me-1"></i>View / Hide
+            </button>
+
+            <!-- Delete -->
+            <form method="post" onsubmit="return confirm('Delete this tip?');">
+              <input type="hidden" name="tip_id" value="{{ tip.id }}">
+              <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt me-1"></i>Delete
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-muted text-center">
+    <i class="fas fa-info-circle me-2"></i>No tips found.
+  </p>
+  {% endif %}
+
+</div>
+
+<!-- ADD TIP MODAL -->
+<div class="modal fade" id="addTipModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content shadow">
+
+      <div class="modal-header bg-gradient-medical text-white">
+        <h5 class="modal-title">
+          <i class="fas fa-plus-circle me-2"></i>Add New Health Tip
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form method="post" action="{{ url_for('adminhealthtips') }}">
+        <div class="modal-body bg-white">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Health Tip</label>
+            <textarea name="tip" rows="4" class="form-control" required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" name="action" value="add" class="btn btn-success px-4">
+            <i class="fas fa-save me-2"></i>Save Tip
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

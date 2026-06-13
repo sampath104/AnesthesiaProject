@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}Home - Anesthesia Complication Predictor{% endblock %}
+
+{% block content %}
+<main>
+  <div class="container">
+
+    <!-- Hero Section -->
+    <div class="main-card animate__animated animate__fadeIn">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="hero-title">AI-Powered Anesthesia Risk Assessment</h1>
+          <p class="hero-subtitle">Predict anesthesia complications before surgery with advanced machine learning. Our
+            system analyzes patient data, surgery details, and medical history to provide accurate risk assessments,
+            helping healthcare professionals make informed decisions for safer anesthesia management.</p>
+          <div class="mt-4">
+            <a href="{{ url_for('userlogin') }}"
+              class="btn btn-primary btn-lg cta-button me-2 animate__animated animate__pulse animate__infinite">Get
+              Started</a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-dark btn-lg cta-button">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="{{ url_for('static', filename='Images/anesthesia_hero.png') }}"
+            alt="Anesthesia monitoring equipment" class="img-fluid rounded animate__animated animate__zoomIn"
+            style="max-height: 400px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="main-card animate__animated animate__fadeInUp">
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">500K+</div>
+          <div class="stats-label">Surgeries Annually</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">98%</div>
+          <div class="stats-label">Prediction Accuracy</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">30s</div>
+          <div class="stats-label">Analysis Time</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">15K+</div>
+          <div class="stats-label">Patients Assessed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="main-card animate__animated animate__fadeIn">
+      <h2 class="text-center section-title center mb-5">Why Choose Our Anesthesia Predictor?</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center animate__animated animate__fadeInUp">
+            <i class="fas fa-brain feature-icon"></i>
+            <h4>Advanced ML Algorithms</h4>
+            <p>Powered by Logistic Regression, Random Forest, and XGBoost models trained on thousands of anesthesia
+              cases for superior accuracy in risk prediction.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center animate__animated animate__fadeInUp animate__delay-1s">
+            <i class="fas fa-heartbeat feature-icon"></i>
+            <h4>Comprehensive Analysis</h4>
+            <p>Analyzes multiple factors including age, BMI, surgery type, duration, anesthesia type, pain levels, and
+              medical notes for holistic risk assessment.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center animate__animated animate__fadeInUp animate__delay-2s">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <h4>Patient Safety First</h4>
+            <p>Identify potential complications early, enabling anesthesiologists to take preventive measures and
+              improve surgical outcomes significantly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="main-card animate__animated animate__fadeIn">
+      <h2 class="text-center section-title center mb-5">How It Works</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4">
+          <img src="{{ url_for('static', filename='Images/surgery_preparation.png') }}"
+            alt="Surgery preparation and monitoring"
+            class="img-fluid rounded shadow animate__animated animate__fadeInLeft"
+            style="max-height: 350px; width: 100%; object-fit: cover;">
+        </div>
+        <div class="col-lg-6">
+          <div class="mb-4 d-flex align-items-start animate__animated animate__fadeInUp">
+            <div class="step-number">1</div>
+            <div>
+              <h4>Input Patient Data</h4>
+              <p>Enter comprehensive patient information including age, gender, BMI, medical history, and surgery
+                details through our intuitive interface.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex align-items-start animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="step-number">2</div>
+            <div>
+              <h4>AI Analysis</h4>
+              <p>Our machine learning models process the data using advanced algorithms including feature engineering,
+                TF-IDF text analysis, and ensemble methods.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex align-items-start animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="step-number">3</div>
+            <div>
+              <h4>Risk Assessment</h4>
+              <p>Receive instant predictions on complication likelihood with confidence scores and detailed risk factors
+                breakdown.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start animate__animated animate__fadeInUp animate__delay-3s">
+            <div class="step-number">4</div>
+            <div>
+              <h4>Clinical Decision Support</h4>
+              <p>Get actionable recommendations and insights to optimize anesthesia planning and improve patient safety
+                outcomes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technology Section -->
+    <div class="main-card animate__animated animate__fadeIn">
+      <h2 class="text-center section-title center mb-5">Powered by Advanced Technology</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2 mb-4">
+          <img src="{{ url_for('static', filename='Images/ai_medical_analysis.png') }}" alt="AI medical data analysis"
+            class="img-fluid rounded shadow animate__animated animate__fadeInRight"
+            style="max-height: 350px; width: 100%; object-fit: cover;">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <h3 class="mb-4">Machine Learning Models</h3>
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <i class="fas fa-check-circle text-success me-2"></i>
+              <strong>Logistic Regression:</strong> Interpretable baseline model for risk classification
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-check-circle text-success me-2"></i>
+              <strong>Random Forest:</strong> Ensemble learning for robust predictions
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-check-circle text-success me-2"></i>
+              <strong>XGBoost:</strong> Gradient boosting for maximum accuracy
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-check-circle text-success me-2"></i>
+              <strong>TF-IDF Vectorization:</strong> Advanced text analysis for medical notes
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-check-circle text-success me-2"></i>
+              <strong>Feature Engineering:</strong> One-hot encoding and standardization
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}

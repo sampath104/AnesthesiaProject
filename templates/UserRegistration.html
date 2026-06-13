@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Register - Anesthesia Predictor{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center justify-content-center my-5"
+  style="min-height: 80vh; padding-top: 40px; padding-bottom: 40px;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 col-lg-6">
+        <div class="main-card shadow-lg animate__animated animate__fadeInDown">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <span class="fa-stack fa-2x mb-2">
+                <i class="fas fa-circle fa-stack-2x" style="color:#0277bd;"></i>
+                <i class="fas fa-heartbeat fa-stack-1x fa-inverse"></i>
+              </span>
+              <h3 class="fw-bold mb-2" style="color:#0277bd;">Create Account</h3>
+              <p class="mb-0" style="color:#546e7a;">Join Anesthesia Complication Predictor and access advanced risk
+                assessment tools!</p>
+            </div>
+
+            {% if msg %}
+            <div class="alert alert-{{ msg_type }} text-center">{{ msg }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('userregistration') }}" onsubmit="return validateForm()">
+              <div class="mb-3">
+                <label for="name" class="form-label fw-semibold">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+              </div>
+              <div class="mb-3">
+                <label for="mobile" class="form-label fw-semibold">Mobile Number</label>
+                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter mobile number"
+                  pattern="\d{10}" maxlength="10" required>
+                <small id="mobileHelp" class="form-text text-muted">Enter a 10-digit mobile number.</small>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Create password"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="confirm_password" class="form-label fw-semibold">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                  placeholder="Repeat password" required>
+                <small id="passwordHelp" class="form-text text-muted">Passwords must match.</small>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                <label class="form-check-label" for="terms">
+                  I agree to the <a href="#" style="color:#0277bd; text-decoration: none;">Terms & Conditions</a>
+                </label>
+              </div>
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-user-plus me-2"></i>Register
+                </button>
+              </div>
+              <div class="text-center">
+                <span style="color:#546e7a;">Already have an account?</span>
+                <a href="{{ url_for('userlogin') }}" class="fw-bold"
+                  style="color:#0277bd; text-decoration: none;">Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function validateForm() {
+    // Password and Confirm Password Validation
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm_password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+
+    // Mobile Number Validation (10 digits)
+    var mobile = document.getElementById("mobile").value;
+    var mobilePattern = /^\d{10}$/;
+    if (!mobilePattern.test(mobile)) {
+      alert("Please enter a valid 10-digit mobile number.");
+      return false;
+    }
+
+    // If everything is valid, return true to submit the form
+    return true;
+  }
+</script>
+{% endblock %}

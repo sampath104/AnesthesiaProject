@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anesthesia Complication Predictor</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Medical Teal-Blue Color Scheme */
+      :root {
+        /* Primary Colors */
+        --teal-primary: #00897b;
+        --teal-secondary: #26a69a;
+        --teal-light: #b2dfdb;
+        
+        /* Medical Blues */
+        --blue-primary: #0277bd;
+        --blue-secondary: #4fc3f7;
+        --blue-light: #e1f5fe;
+        
+        /* Accent Colors */
+        --green-medical: #43a047;
+        --green-light: #c8e6c9;
+        
+        /* Neutrals */
+        --dark: #263238;
+        --gray: #546e7a;
+        --light-gray: #eceff1;
+        --white: #ffffff;
+        
+        /* Status Colors */
+        --success: #4caf50;
+        --warning: #ff9800;
+        --danger: #f44336;
+        --info: #2196f3;
+      }
+      
+      * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      
+      .bg-gradient-medical {
+        background: linear-gradient(135deg, var(--teal-primary) 0%, var(--blue-primary) 100%) !important;
+      }
+      
+      .navbar-brand, .footer-title {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      
+      .footer-gradient {
+        background: linear-gradient(135deg, var(--teal-primary) 0%, var(--blue-primary) 100%);
+        color: var(--white);
+      }
+      
+      .navbar .nav-link.active, .navbar .nav-link:focus, .navbar .nav-link:hover {
+        color: var(--white) !important;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+    
+      body {
+        background: linear-gradient(120deg, var(--blue-light) 0%, var(--teal-light) 100%);
+        min-height: 100vh;
+        color: var(--dark);
+      }
+
+      main {
+        min-height: 70vh;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      
+      /* Card style for main content */
+      .main-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 137, 123, 0.15);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--dark);
+        border: 1px solid rgba(0, 137, 123, 0.1);
+        backdrop-filter: blur(10px);
+      }
+      
+      /* Footer enhancement */
+      .footer-gradient {
+        border-top: 4px solid var(--teal-secondary);
+        letter-spacing: 0.5px;
+        font-size: 1rem;
+      }
+      
+      /* Form and button tweaks */
+      .form-control, .form-select {
+        background-color: #ffffff;
+        color: var(--dark);
+        border: 2px solid var(--light-gray);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s;
+      }
+      
+      .form-control:focus, .form-select:focus {
+        background-color: #ffffff;
+        color: var(--dark);
+        border-color: var(--teal-primary);
+        box-shadow: 0 0 0 0.2rem rgba(0, 137, 123, 0.15);
+      }
+      
+      .btn-primary {
+        background: linear-gradient(135deg, var(--teal-primary), var(--teal-secondary));
+        border: none;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 137, 123, 0.3);
+      }
+      
+      .btn-primary:hover, .btn-primary:focus {
+        background: linear-gradient(135deg, var(--teal-secondary), var(--blue-primary));
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 137, 123, 0.4);
+      }
+      
+      .btn-medical {
+        background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+        border: none;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(2, 119, 189, 0.3);
+      }
+      
+      .btn-medical:hover, .btn-medical:focus {
+        background: linear-gradient(135deg, var(--blue-secondary), var(--teal-primary));
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(2, 119, 189, 0.4);
+      }
+      
+      /* Medical-specific styling */
+      .medical-icon {
+        color: var(--teal-primary);
+      }
+      
+      .feature-icon {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--teal-primary), var(--blue-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .hero-section {
+        text-align: center;
+        padding: 2rem 0;
+      }
+      
+      .hero-title {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--teal-primary), var(--blue-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        color: var(--gray);
+        line-height: 1.6;
+      }
+      
+      .cta-button {
+        padding: 0.9rem 2.5rem;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        margin: 0.5rem;
+      }
+      
+      .feature-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        border-top: 4px solid var(--teal-primary);
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 137, 123, 0.15);
+        border-top: 4px solid var(--blue-primary);
+      }
+      
+      .stats-number {
+        font-size: 2.8rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--teal-primary), var(--blue-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .stats-label {
+        font-size: 1rem;
+        color: var(--gray);
+        font-weight: 500;
+        margin-top: 0.5rem;
+      }
+      
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, var(--teal-primary), var(--blue-primary));
+        color: white;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-right: 1.2rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 137, 123, 0.3);
+      }
+      
+      .section-title {
+        color: var(--dark);
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        position: relative;
+        padding-bottom: 0.75rem;
+      }
+      
+      .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(to right, var(--teal-primary), var(--blue-primary));
+        border-radius: 2px;
+      }
+      
+      .section-title.center:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .highlight {
+        background: linear-gradient(135deg, var(--teal-primary), var(--blue-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+      }
+      
+      .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-link:hover {
+        color: white !important;
+      }
+      
+      .floating-element {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(0, 137, 123, 0.3); }
+        50% { box-shadow: 0 0 30px rgba(0, 137, 123, 0.6); }
+      }
+      
+      .blob {
+        position: fixed;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      
+      .blob-1 {
+        width: 500px;
+        height: 500px;
+        background: var(--teal-light);
+        top: -150px;
+        right: -150px;
+      }
+      
+      .blob-2 {
+        width: 400px;
+        height: 400px;
+        background: var(--blue-light);
+        bottom: -100px;
+        left: -100px;
+      }
+      
+      .medical-pattern {
+        background-image: 
+          repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 137, 123, 0.02) 35px, rgba(0, 137, 123, 0.02) 70px);
+      }
+    </style>
+</head>
+<body class="medical-pattern">
+    <!-- Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <!-- Navbar with medical gradient theme -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-medical shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <i class="fa-solid fa-syringe me-2 floating-element"></i>Anesthesia Complication Predictor
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+  <li class="nav-item">
+    <a class="nav-link text-white {% if request.path == url_for('index') %}fw-bold text-warning{% endif %}" 
+       href="{{ url_for('index') }}">
+      <i class="fas fa-home me-2"></i>Home
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white {% if request.path == url_for('about') %}fw-bold text-warning{% endif %}" 
+       href="{{ url_for('about') }}">
+      <i class="fas fa-info-circle me-2"></i>About Us
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white {% if request.path == url_for('adminlogin') %}fw-bold text-warning{% endif %}" 
+       href="{{ url_for('adminlogin') }}">
+      <i class="fas fa-user-shield me-2"></i>Admin
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white {% if request.path == url_for('userlogin') %}fw-bold text-warning{% endif %}" 
+       href="{{ url_for('userlogin') }}">
+      <i class="fas fa-user me-2"></i>User
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white {% if request.path == url_for('contact') %}fw-bold text-warning{% endif %}" 
+       href="{{ url_for('contact') }}">
+      <i class="fas fa-envelope me-2"></i>Contact
+    </a>
+  </li>
+</ul>
+
+
+        </div>
+      </div>
+    </nav>
+    
+      <!-- Main Content -->
+  <main>
+    <div class="container">
+      <div class="main-card animate__animated animate__fadeIn">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+    
+    <!-- Footer with medical gradient theme -->
+    <footer class="footer-gradient text-center py-4">
+        &copy; 2025 <span class="footer-title">Anesthesia Complication Predictor</span>. All rights reserved.
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

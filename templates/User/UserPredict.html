@@ -1,0 +1,92 @@
+{% extends "User/UserBase.html" %}
+
+{% block title %}Predict Outcome{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card shadow-lg animate__animated animate__fadeIn">
+    <div class="card-header bg-gradient-medical text-white">
+      <h4 class="mb-0">
+        <i class="fas fa-stethoscope me-2"></i>Anesthesia Outcome Prediction
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form method="POST">
+        <div class="row g-3">
+
+          <div class="col-md-3">
+            <label class="form-label">Age</label>
+            <input type="number" name="Age" class="form-control" required>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Gender</label>
+            <select name="Gender" class="form-select" required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">BMI</label>
+            <input type="number" step="0.1" name="BMI" class="form-control" required>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Pain Level (0–10)</label>
+            <input type="number" min="0" max="10" name="PainLevel" class="form-control" required>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Surgery Type</label>
+            <input type="text" name="SurgeryType" class="form-control" required>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Surgery Duration (mins)</label>
+            <input type="number" name="SurgeryDuration" class="form-control" required>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Anesthesia Type</label>
+            <input type="text" name="AnesthesiaType" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Complications (if any)</label>
+            <input type="text" name="Complications" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Notes</label>
+            <textarea name="Notes" class="form-control" rows="2"></textarea>
+          </div>
+
+        </div>
+
+        <div class="mt-4 text-center">
+          <button type="submit" class="btn btn-success px-5">
+            <i class="fas fa-brain me-2"></i>Predict
+          </button>
+        </div>
+      </form>
+
+      {% if prediction is not none %}
+      <div class="alert mt-4 
+        {% if prediction == 1 %}alert-danger{% else %}alert-success{% endif %}">
+        <h5 class="mb-0">
+          {% if prediction == 1 %}
+            ⚠️ Complications Likely
+          {% else %}
+            ✅ No Complications Expected
+          {% endif %}
+        </h5>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

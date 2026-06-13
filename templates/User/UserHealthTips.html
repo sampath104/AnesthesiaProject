@@ -1,0 +1,47 @@
+{% extends "User/Userbase.html" %}
+{% block title %}Health Tips - User Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+  <!-- Page Header -->
+  <div class="mb-4 p-4 rounded shadow-sm bg-white animate__animated animate__fadeIn">
+    <h3 class="fw-bold text-medical-blue mb-1">
+      <i class="fas fa-heartbeat me-2 text-teal"></i>
+      Anesthesia Health Tips
+    </h3>
+    <p class="text-muted mb-0">
+      Important guidelines to follow before and after anesthesia.
+    </p>
+  </div>
+
+  {% if tips %}
+  <!-- Tips Card -->
+  <div class="card shadow-sm border-0 animate__animated animate__fadeInUp">
+    <div class="card-body rounded"
+         style="background: linear-gradient(135deg, #b2dfdb 0%, #e1f5fe 100%);">
+
+      <ul class="list-unstyled mb-0">
+        {% for tip in tips %}
+        <li class="d-flex align-items-start mb-3">
+          <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+          <span class="text-secondary fw-medium">
+            {{ tip.tip }}
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+
+  {% else %}
+  <!-- Empty State -->
+  <div class="alert alert-warning shadow-sm text-center">
+    <i class="fas fa-exclamation-circle me-2"></i>
+    No health tips available at the moment.
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}About Us - Anesthesia Complication Predictor{% endblock %}
+
+{% block content %}
+
+<main>
+  <div class="container">
+
+    <!-- About Section -->
+    <div class="main-section animate__animated animate__fadeIn">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-6">
+          <h2 class="section-title mb-4">About Our Project</h2>
+          <p>
+            The <strong>Anesthesia Complication Predictor</strong> leverages advanced
+            Machine Learning algorithms to provide accurate risk assessment for anesthesia
+            procedures. Our goal is to empower healthcare providers with AI-powered tools
+            that enhance patient safety through <em>early risk identification and preventive care</em>.
+          </p>
+          <p>
+            This system employs <strong>Logistic Regression, Random Forest, and XGBoost</strong>
+            models trained on comprehensive patient data, achieving remarkable prediction accuracy
+            while ensuring fast and intuitive risk assessment for anesthesiologists and surgical teams.
+          </p>
+          <p>
+            By analyzing patient demographics, medical history, surgery details, and clinical notes
+            using advanced preprocessing techniques including TF-IDF vectorization and feature engineering,
+            our system provides actionable insights for safer anesthesia management.
+          </p>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="{{ url_for('static', filename='Images/ai_medical_analysis.png') }}" alt="Anesthesia AI Analysis"
+            class="img-fluid rounded shadow animate__animated animate__zoomIn"
+            style="max-height: 400px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="main-card mt-4 animate__animated animate__fadeInUp">
+      <div class="row text-center">
+        <div class="col-md-6 mb-4">
+          <div class="p-4 h-100 feature-card">
+            <i class="fas fa-bullseye feature-icon medical-icon mb-3"></i>
+            <h4>Our Mission</h4>
+            <p>
+              To utilize Artificial Intelligence and machine learning to provide
+              accurate, rapid, and accessible anesthesia risk assessment, improving
+              patient safety and surgical outcomes in healthcare facilities worldwide.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="p-4 h-100 feature-card">
+            <i class="fas fa-lightbulb feature-icon medical-icon mb-3"></i>
+            <h4>Our Vision</h4>
+            <p>
+              A future where advanced AI technology supports anesthesiologists in every
+              operating room, enabling data-driven decision-making, reducing complications,
+              and ensuring the highest standards of patient care during surgical procedures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="main-card mt-4 animate__animated animate__fadeIn">
+      <h2 class="text-center section-title center mb-5">Our Technology</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center h-100">
+            <i class="fas fa-robot feature-icon"></i>
+            <h5>Machine Learning Models</h5>
+            <p>Logistic Regression, Random Forest, and XGBoost for ensemble predictions</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center h-100">
+            <i class="fas fa-database feature-icon"></i>
+            <h5>Data Processing</h5>
+            <p>Advanced preprocessing with one-hot encoding, scaling, and TF-IDF vectorization</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-card text-center h-100">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <h5>Performance Metrics</h5>
+            <p>98% accuracy with comprehensive model evaluation and validation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="main-card mt-4">
+      <h2 class="text-center section-title center mb-5">Meet Our Team</h2>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 feature-card animate__animated animate__fadeInUp">
+            <img src="{{ url_for('static', filename='Images/memb1.jpg') }}" alt="Team Member"
+              class="rounded-circle mb-3 shadow" width="120" height="120">
+            <h5>Dr. Sarah Mitchell</h5>
+            <p class="text-muted">Anesthesiology Advisor</p>
+            <p>Guides the integration of AI solutions into real-world anesthesia workflows and clinical practice.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 feature-card animate__animated animate__fadeInUp animate__delay-1s">
+            <img src="{{ url_for('static', filename='Images/memb2.jpg') }}" alt="Team Member"
+              class="rounded-circle mb-3 shadow" width="120" height="120">
+            <h5>David Chen</h5>
+            <p class="text-muted">Lead ML Engineer</p>
+            <p>Architect behind the machine learning models, data pipeline, and Flask web application integration.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="p-4 h-100 feature-card animate__animated animate__fadeInUp animate__delay-2s">
+            <img src="{{ url_for('static', filename='Images/memb3.jpg') }}" alt="Team Member"
+              class="rounded-circle mb-3 shadow" width="120" height="120">
+            <h5>Emily Rodriguez</h5>
+            <p class="text-muted">UI/UX Designer</p>
+            <p>Designed an intuitive and professional interface for seamless user experience and clinical workflow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+{% endblock %}

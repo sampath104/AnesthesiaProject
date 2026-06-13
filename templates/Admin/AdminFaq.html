@@ -1,0 +1,123 @@
+{% extends 'Admin/Adminbase.html' %}
+{% block title %}Manage FAQs - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4 p-4 rounded shadow-sm bg-white animate__animated animate__fadeIn">
+    <div>
+      <h3 class="fw-bold text-medical-blue mb-1">
+        <i class="fas fa-question-circle me-2 text-teal"></i>Manage FAQs
+      </h3>
+      <p class="text-muted mb-0">Add, view, and manage frequently asked questions.</p>
+    </div>
+
+    <!-- Add FAQ Button -->
+    <button class="btn btn-success px-4" data-bs-toggle="modal" data-bs-target="#addFaqModal">
+      <i class="fas fa-plus me-2"></i>Add FAQ
+    </button>
+  </div>
+
+  {% if msg %}
+  <div class="alert alert-{{ msg_type }} alert-dismissible fade show shadow-sm">
+    <i class="fas fa-info-circle me-2"></i>{{ msg }}
+    <button type="button" class="btn-close btn-close-teal" data-bs-dismiss="alert"></button>
+  </div>
+  {% endif %}
+
+  <!-- FAQ BLOCKS -->
+  <!-- FAQ BLOCKS (FULL WIDTH) -->
+{% if faqs %}
+<div class="row">
+  {% for faq in faqs %}
+  <div class="col-12 mb-4">
+    <div class="card shadow-sm border-0 animate__animated animate__fadeInUp">
+
+      <div class="card-header bg-gradient-medical text-white d-flex justify-content-between align-items-center">
+        <span class="fw-semibold fs-6">
+          <i class="fas fa-question-circle me-2"></i>{{ faq.question }}
+        </span>
+        <small class="opacity-75">
+          {{ faq.created_at.strftime('%Y-%m-%d') }}
+        </small>
+      </div>
+
+      <div class="card-body">
+        <p class="text-secondary collapse mb-3" id="answer{{ faq.id }}">
+          {{ faq.answer }}
+        </p>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Toggle Answer -->
+          <button class="btn btn-outline-primary btn-sm"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#answer{{ faq.id }}">
+            <i class="fas fa-eye me-1"></i>View / Hide
+          </button>
+
+          <!-- Delete -->
+          <form method="POST" onsubmit="return confirm('Delete this FAQ?');">
+            <input type="hidden" name="delete_id" value="{{ faq.id }}">
+            <button type="submit" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash-alt me-1"></i>Delete
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="text-muted text-center">
+  <i class="fas fa-info-circle me-2"></i>No FAQs found.
+</p>
+{% endif %}
+
+
+</div>
+
+<!-- ADD FAQ MODAL -->
+<div class="modal fade" id="addFaqModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content shadow">
+
+      <div class="modal-header bg-gradient-medical text-white">
+        <h5 class="modal-title">
+          <i class="fas fa-plus-circle me-2"></i>Add New FAQ
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form method="POST">
+        <div class="modal-body bg-white">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Question</label>
+            <input type="text" name="question" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Answer</label>
+            <textarea name="answer" class="form-control" rows="4" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success px-4">
+            <i class="fas fa-save me-2"></i>Save FAQ
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
